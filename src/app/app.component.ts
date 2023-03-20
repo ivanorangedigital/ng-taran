@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+import { MediaService } from './services/media.service';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
-  title = 'taran-restaurant';
+  constructor(private readonly mediaService: MediaService) {
+    this.mediaService.getMedia().subscribe(res => console.log(res));
+  }
 }
