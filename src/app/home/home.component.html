@@ -1,0 +1,87 @@
+<style>
+    .amatic {
+        font-family: "Amatic SC", Sans-serif;
+    }
+</style>
+
+<section>
+    <div [ngStyle]="{'height': 'calc(100vh - ' + headerHeight + 'px)'}" class="bg-center bg-cover bg-no-repeat relative"
+        [style.background-image]="'url(https://www.ristoranteclassicosalernitano.com/wp-content/uploads/2022/10/e2dd35fb0142.jpg)'">
+        <div
+            class="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 items-center justify-center h-5/6 w-5/6 lg:w-2/3 lg:h-2/3 bg-white bg-opacity-80 border-[10px] border-white flex flex-col space-y-6 p-2">
+            <p class="text-center text-3xl sm:text-5xl amatic">Benvenuti al</p>
+            <h1 class="text-center font-semibold text-5xl sm:text-7xl amatic">ristorante classico salernitano</h1>
+            <h2 class="text-center text-3xl sm:text-5xl amatic">cucina tradizionale salernitana</h2>
+        </div>
+    </div>
+
+    <div>
+        <app-section></app-section>
+
+        <app-section src="https://www.ristoranteclassicosalernitano.com/wp-content/uploads/2022/10/brou-vert.jpg"
+            title="I nostri piatti"
+            [descriptions]="['La maestranza e la passione dello Chef, si possono apprezzare fin dagli eccellenti antipasti. I Primi piatti, sia di pesce che di carne, una vera esperienza di sapori. I secondi a base pesce locale vanno a valorizzare il pesce povero, senza fronzoli che diventa ricco e generoso. Ricette antiche che non amiamo definire gourmet, ma frutto dello sposalizio tra tradizione e innovazione, percorso che seguiamo anche per i secondi di carne, con i quali valorizziamo anche le carni locali. Infine, i dolci fatti dalle abili mani del nostro pastry chef in giornata.', 'Abbiamo scelto per accompagnare i nostri piatti molte etichette del territorio campano che con il giusto abbinamento esalterano il gusto di ogni elemento del piatto. Ecco alcune tra le etichette della nostra cantina: Fiano, Greco di Tufo, Taurasi, Falanghina del Sannio, Aglianico del Taburno. Il vino però apre i confini e peranto potrai trovare da noi una vasta scelta di vini italiani e stranieri e vasta scelta di bollicine e distillati']"
+            [reverse]="true">
+            <div class="flex flex-col space-y-6">
+                <h2 class="text-center text-3xl font-semibold">Qualche Foto</h2>
+                <app-swiper [config]="config">
+                    <ng-container *ngFor="let image of images | async">
+                        <ng-template swiperItem>
+                            <img class="rounded-md object-cover object-center w-full h-56 lg:h-32" [src]="image.src">
+                        </ng-template>
+                    </ng-container>
+                </app-swiper>
+                <button routerLink="/gallery"
+                    class="p-3 w-max mx-auto rounded-md text-white bg-yellow-500 font-uppercase font-bold duration-300 hover:bg-yellow-700">vedi
+                    tutto</button>
+            </div>
+        </app-section>
+
+        <app-section src="https://www.ristoranteclassicosalernitano.com/wp-content/uploads/2022/10/salerno-hd.jpeg"
+            title="contatti e info"
+            [descriptions]="['Ci trovi a Salerno a Via Porta Catena n. 1, nel cuore del Centro storico a pochi metri da Largo Campo, dalla Villa Comunale, dalla Cupola Vanvitelliana e dai Giardini di Minerva, all’interno del percorso delle Luci d’Artista. Contattaci sui social oppure telefonicamente per prenotazioni. Siamo presenti su tutti i portali di prenotazione online, come The Fork e Trip Advisor.']">
+            <div class="flex flex-col justify-between space-y-3 sm:flex-row sm:space-x-3">
+                <div class="flex flex-1 flex-col items-center justify-center space-y-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                        class="h-12 w-12 text-red-500">
+                        <path fill-rule="evenodd"
+                            d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 00-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 002.682 2.282 16.975 16.975 0 001.145.742zM12 13.5a3 3 0 100-6 3 3 0 000 6z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <h2 class="text-2xl font-semibold capitalize">indirizzo</h2>
+                    <p class="text-center">
+                        Salerno, Via Porta Catena, n 1 (Centro Storico di Salerno)
+                    </p>
+                </div>
+                <div class="flex flex-1 flex-col items-center justify-center sm:justify-start space-y-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                        class="h-12 w-12 text-red-500">
+                        <path fill-rule="evenodd"
+                            d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 006.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 011.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5z"
+                            clip-rule="evenodd" />
+                    </svg>
+
+                    <h2 class="text-2xl font-semibold capitalize">Telefono</h2>
+                    <p class="text-center">
+                        Fisso: 089 2594 832 <br />
+                        Cellulare: 3487065708
+                    </p>
+                </div>
+                <div class="flex flex-1 flex-col items-center justify-center space-y-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="h-12 w-12 text-red-500">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+
+                    <h2 class="text-2xl font-semibold capitalize">Orario</h2>
+                    <p class="text-center">
+                        Tutti i giorni <br />
+                        Pranzo: 12:00 - 15:00 <br />
+                        Cena: 19:00 - 23:00
+                    </p>
+                </div>
+            </div>
+        </app-section>
+    </div>
+</section>

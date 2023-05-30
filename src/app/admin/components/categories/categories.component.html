@@ -1,0 +1,29 @@
+<section class="p-2 space-y-3">
+    <!--<div class="flex justify-between">
+        <h2 class="uppercase font-semibold text-xl">categorie principali</h2>
+        <button (click)="addMainCategory()">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>              
+        </button>
+    </div>
+    <div class="flex space-x-3">
+        <ng-container *ngFor="let category of categories$ | async">
+            <button (click)="openSubCategories(category.id)" class="uppercase text-yellow-500 font-semibold p-2 rounded-md bg-white">{{category.name}}</button>
+        </ng-container>
+    </div>
+    <div class="flex flex-col space-y-3">
+        <ng-container *ngFor="let subCategory of subCategories$ | async">
+            <button (click)="deleteCategory(subCategory.id)" class="uppercase text-black font-semibold text-left">{{subCategory.name}}</button>
+        </ng-container>
+    </div>-->
+
+    <ng-container *ngFor="let category of categories$ | async">
+        <button (click)="openSubCategories(category.id)" class="uppercase text-yellow-500 font-semibold p-2 rounded-md bg-white">{{category.name}}</button>
+        <ng-container *ngFor="let subCategory of subCategories$ | async">
+            <ng-container *ngIf="category.id === subCategory.parent">
+                <button (click)="deleteCategory(subCategory.id)" class="uppercase text-black font-semibold text-left">{{subCategory.name}}</button>
+            </ng-container>
+        </ng-container>
+    </ng-container>
+</section>

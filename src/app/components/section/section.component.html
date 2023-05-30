@@ -1,0 +1,8 @@
+<section class="grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
+    <img #image class="object-cover object-center w-full h-[800px] max-h-96 lg:max-h-full lg:row-start-1" [src]="src" [ngClass]="{'lg:col-start-2': reverse}">
+    <div class="p-6 space-y-6 h-full flex flex-col justify-center lg:row-start-1" [ngClass]="{'lg:col-start-1': reverse}">
+        <h2 class="text-center text-3xl font-semibold capitalize">{{title}}</h2>
+        <p *ngFor="let description of descriptions" class="text-center">{{description}}</p>
+        <ng-content></ng-content>
+    </div>
+</section>

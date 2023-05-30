@@ -1,0 +1,22 @@
+<section class="px-3 py-6 grid md:grid-cols-3 gap-8">
+
+    <div
+        class="flex flex-row md:flex-col justify-center items-center space-x-4 md:space-y-12 md:space-x-0 md:col-span-1">
+
+        <ng-container *ngFor="let category of categories$ | async">
+            <div role="button" class="rounded-md h-44 md:h-56 w-full bg-white shadow-md group overflow-hidden" (click)="openCategory(category.id)">
+                <div class="h-full flex items-center justify-center bg-center bg-cover bg-no-repeat duration-300 md:hover:scale-125" [style.background-image]="'url(' + category.image?.src + ')'">
+                    <p class="uppercase font-bold text-white text-lg md:text-3xl duration-300 md:group-hover:text-8xl">{{category.name}}</p>
+                </div>
+            </div>
+        </ng-container>
+
+    </div>
+
+    <div class="md:col-span-2">
+
+        <router-outlet></router-outlet>
+
+    </div>
+
+</section>

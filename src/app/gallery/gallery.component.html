@@ -1,0 +1,11 @@
+<section class="px-3 py-6">
+    <div #imageContainer class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8">
+        <div *ngFor="let image of images | async; let i = index" [@fadeIn]="{value:'', params:{ delay: i >= 12 ? (i % 12) * 150 : i * 150 }}">
+
+            <div class="rounded-md overflow-hidden shadow-md w-full h-80">
+                <img class="w-full h-full object-cover object-center image" [src]="image.src">
+            </div>
+
+        </div>
+    </div>
+</section>

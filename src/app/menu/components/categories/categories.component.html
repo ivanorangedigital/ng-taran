@@ -1,0 +1,7 @@
+<ul class="space-y-6">
+    <ng-container *ngFor="let category of categories$ | async">
+        <div categoriesDirective class="duration-300" [ngClass]="id === category.id || !id ? 'opacity-100 pointer-events-auto cursor-auto' : 'opacity-0 pointer-events-none cursor-none'">
+            <app-category [category]="category" (emitEvent)="toggleCategories($event)"></app-category>
+        </div>
+    </ng-container>
+</ul>

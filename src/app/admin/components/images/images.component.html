@@ -1,0 +1,28 @@
+<section>
+    <div class="p-2 flex justify-between uppercase font-semibold">
+        <div class="flex space-x-2">
+            <ng-container *ngIf="!multipleSelection; else optionTemplate">
+                <button (click)="toggleMultipleSelection()" class="uppercase font-semibold">seleziona multipla</button>
+            </ng-container>
+            <ng-template #optionTemplate>
+                <button (click)="deleteImages()" class="uppercase font-semibold text-red-500">elimina</button>
+                <button (click)="toggleMultipleSelection()" class="uppercase font-semibold">chiudi</button>
+            </ng-template>
+        </div>
+
+        <label role="button" for="uploadFile">aggiungi immagini</label>
+        <input class="hidden" id="uploadFile" type="file" multiple (change)="selectFiles($event)">
+    </div>
+    <div class="grid grid-cols-3 gap-6 p-2">
+        <ng-container *ngFor="let image of images$ | async; let index = index">
+            <div class="relative h-44">
+                <img class="w-full h-full object-contain object-center" [src]="image.src">
+                <ng-container *ngIf="multipleSelection">
+                    <input [id]="'checkbox-' + index" type="checkbox" class="absolute top-2 right-2"
+                        (change)="selectImage($event, image.id)">
+                    <label class="absolute inset-0" [for]="'checkbox-' + index"></label>
+                </ng-container>
+            </div>
+        </ng-container>
+    </div>
+</section>
