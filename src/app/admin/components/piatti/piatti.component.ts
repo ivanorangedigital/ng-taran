@@ -27,8 +27,11 @@ export class AdminPiattiComponent implements OnInit {
         this.categories$ = this.shopService.getCategories();
     }
 
-    openSubCategories(id: string) {
-        this.subCategories$ = this.shopService.getCategories(id);
+    openSubCategories(category: CategoryInterface) {
+        this.subCategories$ = this.shopService.getCategories(category.id);
+        if (category.hybrid) {
+            this.openProducts(category.id);
+        }
     }
 
     openProducts(category: string) {
@@ -40,9 +43,9 @@ export class AdminPiattiComponent implements OnInit {
 
     addProduct() {
         const name = prompt('nome piatto');
-        if (!name) return;
+        if (!name) return alert('nome obbligatorio');
         const price = Number(prompt('prezzo'));
-        if (!price) return;
+        if (!price) return alert('prezzo obbligatorio');
         const description = prompt('descrizione')
         const category = this.categoryId;
 

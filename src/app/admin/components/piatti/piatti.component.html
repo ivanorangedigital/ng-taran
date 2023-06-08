@@ -2,7 +2,7 @@
     <h2 class="uppercase font-semibold text-xl">categorie principali</h2>
     <div class="flex space-x-3">
         <ng-container *ngFor="let category of categories$ | async">
-            <button (click)="openSubCategories(category.id)"
+            <button (click)="openSubCategories(category)"
                 class="uppercase text-yellow-500 font-semibold p-2 rounded-md bg-white">{{category.name}}</button>
         </ng-container>
     </div>

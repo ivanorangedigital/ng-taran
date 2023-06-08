@@ -38,4 +38,8 @@ export class ShopService {
     createCategory(data: any): Observable<any> {
         return this.http.post<CategoryInterface>(`${environment.urlServer}/categories/create`, data);
     }
+
+    updateCategory(id: string, data: any): Observable<CategoryInterface> {
+        return this.http.put<CategoryInterface>(`${environment.urlServer}/categories/update/${id}`, data);
+    }
 }

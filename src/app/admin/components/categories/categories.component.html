@@ -1,29 +1,57 @@
-<section class="p-2 space-y-3">
-    <!--<div class="flex justify-between">
-        <h2 class="uppercase font-semibold text-xl">categorie principali</h2>
-        <button (click)="addMainCategory()">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>              
-        </button>
-    </div>
-    <div class="flex space-x-3">
-        <ng-container *ngFor="let category of categories$ | async">
-            <button (click)="openSubCategories(category.id)" class="uppercase text-yellow-500 font-semibold p-2 rounded-md bg-white">{{category.name}}</button>
-        </ng-container>
-    </div>
-    <div class="flex flex-col space-y-3">
-        <ng-container *ngFor="let subCategory of subCategories$ | async">
-            <button (click)="deleteCategory(subCategory.id)" class="uppercase text-black font-semibold text-left">{{subCategory.name}}</button>
-        </ng-container>
-    </div>-->
+<section class="p-2 space-y-12">
 
-    <ng-container *ngFor="let category of categories$ | async">
-        <button (click)="openSubCategories(category.id)" class="uppercase text-yellow-500 font-semibold p-2 rounded-md bg-white">{{category.name}}</button>
-        <ng-container *ngFor="let subCategory of subCategories$ | async">
-            <ng-container *ngIf="category.id === subCategory.parent">
-                <button (click)="deleteCategory(subCategory.id)" class="uppercase text-black font-semibold text-left">{{subCategory.name}}</button>
-            </ng-container>
+    <!--list categories-->
+    <ul class="list-none space-y-6">
+
+        <!--loop categories-->
+        <ng-container *ngFor="let category of categories(); let mainIndex = index">
+
+            <!--category-->
+            <li>
+                <div class="flex space-x-3">
+                    <h2 class="uppercase font-bold text-3xl">{{category.name}}</h2>
+                    <button (click)="addCategory(category.id)" class="flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!--check if subcategories-->
+                <ng-container *ngIf="category.sub && category.sub.length > 0">
+
+                    <!--subcategories list-->
+                    <ul class="list-disc space-y-2">
+
+                        <!--sub categories loop-->
+                        <ng-container *ngFor="let subCategory of category.sub; let subIndex = index">
+
+                            <li [id]="mainIndex + '-' + subIndex + '-' + subCategory.id" #dap draggable="true" class="dropzone">
+                                <div class="flex space-x-3">
+                                    <h2 class="uppercase font-semibold text-gray-600 text-xl">{{subCategory.name}}</h2>
+                                    <button (click)="deleteCategory(subCategory.id, category.id)" class="flex items-center justify-center text-red-500">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </li>
+
+                        </ng-container>
+
+                    </ul>
+
+                </ng-container>
+
+            </li>
+
         </ng-container>
-    </ng-container>
+
+
+    </ul>
+
 </section>

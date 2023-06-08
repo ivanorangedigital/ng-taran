@@ -1,7 +1,21 @@
 <ul class="space-y-6">
-    <ng-container *ngFor="let category of categories$ | async">
-        <div categoriesDirective class="duration-300" [ngClass]="id === category.id || !id ? 'opacity-100 pointer-events-auto cursor-auto' : 'opacity-0 pointer-events-none cursor-none'">
-            <app-category [category]="category" (emitEvent)="toggleCategories($event)"></app-category>
-        </div>
+
+    <ng-container *ngIf="(id$ | async) as id; else categoriesTemplate">
+
+        <app-products [id]="id" [categories]="categories$.value"></app-products>
+
     </ng-container>
+
+    <ng-template #categoriesTemplate>
+
+        <ng-container *ngFor="let category of categories$ | async">
+
+            <div>
+                <app-category [category]="category" [categories]="categories$.value"></app-category>
+            </div>
+
+        </ng-container>
+
+    </ng-template>
+
 </ul>

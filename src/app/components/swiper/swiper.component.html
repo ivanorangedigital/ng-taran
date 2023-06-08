@@ -1,4 +1,4 @@
-<swiper-container swiper [config]="config" init="false" class="h-full w-full">
+<swiper-container swiper [config]="config" init="false">
     <ng-container *ngFor="let swiperItem of swiperItems">
         <swiper-slide>
             <ng-template [ngTemplateOutlet]="swiperItem.tpl"></ng-template>

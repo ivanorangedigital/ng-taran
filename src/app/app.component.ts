@@ -4,6 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { environment } from './../environments/environment';
 import { HeaderComponent } from './components/header/header.component';
 import { CommonModule } from '@angular/common';
+import { FooterComponent } from './components/footer/footer.component';
 
 @Component({
   standalone: true,
@@ -12,7 +13,8 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     RouterModule,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ]
 })
 export class AppComponent implements OnInit {

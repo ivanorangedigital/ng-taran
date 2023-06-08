@@ -7,6 +7,7 @@ import { AppComponent } from './app/app.component';
 import { AppRoutes } from './app/app.routes';
 import { environment } from './environments/environment';
 import { register } from 'swiper/element/bundle';
+import { CookieService } from 'ngx-cookie-service';
 
 // initialize swiper
 register();
@@ -21,6 +22,7 @@ bootstrapApplication(AppComponent, {
       HttpClientModule,
       BrowserAnimationsModule,
       RouterModule.forRoot(AppRoutes),
-    )
+    ),
+    CookieService
   ]
 }).catch(err => console.error(err));

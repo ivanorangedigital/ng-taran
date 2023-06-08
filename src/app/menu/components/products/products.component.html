@@ -1,20 +1,50 @@
-<ul class="bg-white">
-    <ng-container *ngFor="let p of products$ | async; let last = last">
-        <li class="p-2 flex flex-col" [ngClass]="{'border-b': !last}">
-            <div class="flex justify-between">
-                <h2 class="text-black">{{p.name}}</h2>
-                <span class="text-green-500">{{p.price | currency:"EUR"}}</span>
-            </div>
-            <p class="mt-2 lowercase text-sm" *ngIf="p.description">
-                {{p.description}}
-            </p>
-        </li>
-    </ng-container>
-    <div class="w-full flex justify-center my-2">
-        <button (click)="close()">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
-              </svg>                  
+<section class="fixed inset-0 z-50 flex items-center justify-center" @ngIfAnimation>
+
+    <div class="absolute bg-opacity-70 bg-gray-900 inset-0 -z-10" aria-hidden="true" role="button" (click)="close()"
+        @opacity></div>
+
+    <div class="bg-white rounded-md md:w-2/3 md:h-2/3 w-5/6 h-5/6 relative" @openMenu>
+
+        <button (click)="close()"
+            class="p-2 rounded-full bg-red-500 text-white absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 z-10">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                stroke="currentColor" class="w-8 h-8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
         </button>
+
+        <div class="h-full overflow-auto">
+
+            <div class="px-2 py-4 flex space-x-4 w-full overflow-auto bg-white border-b bg-opacity-90">
+                <ng-container *ngFor="let category of categories">
+                    <ng-container *ngIf="category.parent?.hybrid">
+                        <button (click)="changeCategory(category.parent?.id!)"
+                            [ngClass]="{'pointer-events-none bg-yellow-500 text-white': id === category.parent?.id, 'bg-gray-100': id !== category.parent?.id}"
+                            class="p-2 rounded-full font-semibold capitalize">tutto</button>
+                    </ng-container>
+                    <button (click)="changeCategory(category.id)"
+                        [ngClass]="{'pointer-events-none bg-yellow-500 text-white': id === category.id, 'bg-gray-100': id !== category.id}"
+                        class="p-2 rounded-full font-semibold capitalize">{{category.name}}</button>
+                </ng-container>
+            </div>
+
+            <ul>
+
+                <ng-container *ngFor="let p of products$ | async; let last = last; let i = index">
+
+                    <li class="px-2 py-4 flex flex-col" [ngClass]="{'border-b': !last, 'bg-gray-100': i % 2 === 0}">
+                        <div class="flex justify-between">
+                            <h2 class="text-gray-600 text-xl font-bold">{{p.name}}</h2>
+                            <span class="text-green-500 text-xl font-semibold">{{p.price | currency:"EUR"}}</span>
+                        </div>
+                        <p [innerHTML]="p?.description"></p>
+                    </li>
+
+                </ng-container>
+
+            </ul>
+
+        </div>
+
     </div>
-</ul>
+</section>

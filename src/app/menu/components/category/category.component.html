@@ -1,22 +1,14 @@
-<li class="w-full uppercase font-semibold text-gray-600">
+<div class="w-full uppercase font-semibold text-gray-600">
 
-    <div (click)="isOpen ? closeCategory() : openCategory(category.id)" role="button"
-        class="shadow-shadow bg-white p-2 flex justify-between items-center">
+    <div (click)="toggleCategory(category.id)" role="button" class="shadow-shadow bg-white p-2 flex justify-between items-center">
         <h2>{{category.name}}</h2>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-            class="w-6 h-6 duration-300" [ngClass]="isOpen ? 'rotate-180' : 'rotate-0'">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+        </svg>          
     </div>
 
-    <div class="overflow-hidden">
+    <ng-container *ngIf="isOpen()">
+        <app-products (emitEvent)="toggleCategory()" [id]="id" [categories]="categories" @ngIfAnimation></app-products>
+    </ng-container>
 
-        <ng-container *ngIf="isOpen">
-            <div class="relative" @translateY>
-                <app-products (emitEvent)="closeCategory()" [id]="id"></app-products>
-            </div>
-        </ng-container>
-
-    </div>
-
-</li>
+</div>

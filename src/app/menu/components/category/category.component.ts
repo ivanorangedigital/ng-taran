@@ -1,7 +1,8 @@
 import { CommonModule } from "@angular/common";
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, Input, signal } from "@angular/core";
 import { ProductsComponent } from "../products/products.component";
-import { TranslateYAnimation } from "src/app/animations/animation";
+import { TranslateYAnimation, ngIfAnimation } from "src/app/animations/animation";
+import { CategoryInterface } from "src/app/interfaces/category.interface";
 
 @Component({
     standalone: true,
@@ -12,30 +13,27 @@ import { TranslateYAnimation } from "src/app/animations/animation";
         ProductsComponent
     ],
     animations: [
-        TranslateYAnimation
+        TranslateYAnimation,
+        ngIfAnimation
     ]
 })
 
 export class CategoryComponent {
-    @Output() emitEvent = new EventEmitter();
-    @Input() category!: {
-        name: string,
-        id: string,
-        image: null | { src: string },
-        parent: null | string
-    };
+    @Input({ required: true }) category!: CategoryInterface;
+    @Input({ required: true }) categories!: CategoryInterface[];
+
+    // id of category
     id!: string;
+
     // if show products
-    isOpen = false;
+    isOpen = signal(false);
 
-    openCategory(id: string) {
-        this.emitEvent.emit(id);
-        this.id = id;        
-        this.isOpen = true;
-    }
-
-    closeCategory() {
-        this.emitEvent.emit(null);
-        this.isOpen = false;
+    toggleCategory(id: string | undefined = undefined) {
+        this.isOpen.update(
+            isOpen => {
+                if (id) this.id = id;
+                return !isOpen;
+            }
+        );
     }
 }
